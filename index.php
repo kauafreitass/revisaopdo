@@ -1,3 +1,3 @@
 <?php 
-header("view/cadastrar.php");
+header("location: view/cadastrar.php");
 ?>

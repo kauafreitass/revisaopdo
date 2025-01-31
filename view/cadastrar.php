@@ -23,35 +23,33 @@
             </form>
         </div>
     </section>
+
+    <main>
+        <div class="athletes-section">
+            <h2>Lista</h2>
+            <div class="card-container">
+                <?php
+                require_once 'C:\Turma2\xampp\htdocs\projeto1-revisaopdo\config.php';
+                require_once 'C:\Turma2\xampp\htdocs\projeto1-revisaopdo\controller\UsuarioController.php';
+                $usuarioController = new UsuarioController($pdo);
+                $usuarioController->exibirListaUsuarios();
+                ?>
+            </div>
+        </div>
+        </section>
+    </main>
 </body>
 
 </html>
 
 <?php
-require_once 'C:\Turma2\xampp\htdocs\projeto1-revisaopdo\config.php';
 require_once 'C:\Turma2\xampp\htdocs\projeto1-revisaopdo\controller\UsuarioController.php';
-if (isset($_POST["nome_usuario"]) && isset($_POST["idade"]) && isset($_POST['acompanhado']) && isset($_POST['data']) && isset($_POST['horario'])) {
+if (isset($_POST["nome"]) && isset($_POST["descricao"]) && isset($_POST['preco'])) {
     $usuarioController = new UsuarioController($pdo);
-    $idade = $_POST['idade'];
-    $acompanhado = $_POST['acompanhado'];
-    // $autorizado = autorizar($idade, $acompanhado);
-
-    function autorizar($idade, $acompanhado)
-    {
-        if ($idade < 16) {
-            return false;
-        } elseif ($idade >= 16 && $idade < 18 && $acompanhado === "Não") {
-            return false;
-        } elseif ($idade >= 16 && $idade < 18 && $acompanhado === "Sim") {
-            return true;
-        } elseif ($idade >= 18) {
-            return true;
-        };
-    }
 
 
 
-    $participanteController->criarUsuario($_POST["nome_usuario"], $_POST["idade"], $_POST['acompanhado'], $_POST['data'], $_POST['horario'], autorizar($idade, $acompanhado));
+    $usuarioController->criarUsuario($_POST["nome"], $_POST["descricao"], $_POST['preco']);
     header("Location:../../view/paricipantes/index.php");
 }
 ?>
